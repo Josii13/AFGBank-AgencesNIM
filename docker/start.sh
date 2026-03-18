@@ -1,22 +1,18 @@
 #!/bin/sh
-set -e
 
-echo "==> Génération du fichier .env depuis les variables d'environnement..."
-
-# Écrire toutes les variables d'environnement du container dans .env
-# printenv génère KEY=VALUE sur chaque ligne
+echo "==> Génération du fichier .env..."
 printenv | grep -E '^(APP_|DB_|SESSION_|CACHE_|QUEUE_|LOG_|MAIL_|BROADCAST_|FILESYSTEM_|REDIS_|BCRYPT_|VITE_)' > /var/www/html/.env
 
-echo "==> Génération de la clé si absente..."
-php artisan key:generate --no-interaction --force
+echo "==> Génération de la clé..."
+php artisan key:generate --no-interaction --force || echo "WARN: key:generate échoué"
 
 echo "==> Migrations..."
-php artisan migrate --force --no-interaction
+php artisan migrate --force --no-interaction || echo "WARN: migrate échoué"
 
-echo "==> Mise en cache config/routes/vues..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+echo "==> Cache Laravel..."
+php artisan config:cache  || echo "WARN: config:cache échoué"
+php artisan route:cache   || echo "WARN: route:cache échoué"
+php artisan view:cache    || echo "WARN: view:cache échoué"
 
-echo "==> Démarrage nginx + php-fpm..."
-exec supervisord -c /etc/supervisord.conf
+echo "==> Démarrage supervisord..."
+exec /usr/bin/supervisord -c /etc/supervisord.conf
