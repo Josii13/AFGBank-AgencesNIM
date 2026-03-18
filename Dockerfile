@@ -15,17 +15,16 @@ RUN apk add --no-cache \
     freetype-dev
 
 # ---- Extensions PHP ----
+# tokenizer, ctype, fileinfo sont déjà bundlés dans php:8.3-fpm-alpine
 RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
     mbstring \
     xml \
-    tokenizer \
     bcmath \
-    ctype \
-    fileinfo \
     pcntl \
-    opcache
+    opcache \
+    && docker-php-ext-enable opcache
 
 # ---- Composer ----
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
