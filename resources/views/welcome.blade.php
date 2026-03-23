@@ -6,21 +6,24 @@
     <meta name="description" content="Trouvez votre Point NIM AFG Bank Atlantic Group le plus proche de chez vous à Madagascar.">
     <title>Points NIM – AFG Bank</title>
 
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
     <style>
-        /* ---- Map ---- */
+        /* --- Map --- */
         #map {
-            height: 280px;
+            height: 360px;
             width: 100%;
             border-radius: 0 0 1rem 1rem;
         }
         @media (min-width: 768px) {
-            #map { height: 530px; border-radius: 0 0 1rem 1rem; }
+            #map { height: 530px; border-radius: 1rem; }
         }
 
-        /* ---- Leaflet popup ---- */
+        /* --- Leaflet popup --- */
         .leaflet-popup-content-wrapper {
             border-radius: 14px;
             box-shadow: 0 8px 28px rgba(0,0,0,0.18);
@@ -54,7 +57,7 @@
         .nim-popup-open   { color: #00A651; font-weight: 600; }
         .nim-popup-closed { color: #E30613; font-weight: 600; }
 
-        /* ---- Bouton fermer popup ---- */
+        /* --- Bouton fermer popup --- */
         .leaflet-popup-close-button {
             width: 26px !important;
             height: 26px !important;
@@ -74,98 +77,76 @@
             color: #111827 !important;
         }
 
-        /* ---- Active card ---- */
+        /* --- Active card --- */
         .card-active {
             border-color: #00A651 !important;
             background-color: #f0fdf4 !important;
             box-shadow: 0 0 0 2px rgba(0,166,81,0.15) !important;
         }
 
-        /* ---- Scrollable list desktop ---- */
+        /* --- Scrollable list on desktop --- */
         @media (min-width: 768px) {
-            #nim-list-wrapper {
-                max-height: 530px;
-                overflow-y: auto;
-                padding-right: 2px;
-            }
-            #nim-list-wrapper::-webkit-scrollbar { width: 4px; }
-            #nim-list-wrapper::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
-            #nim-list-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        }
-
-        /* ---- Scrollable list mobile (sous la carte) ---- */
-        @media (max-width: 767px) {
-            #nim-list-wrapper {
-                max-height: 340px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
+            #nim-list { max-height: 530px; overflow-y: auto; padding-right: 2px; }
+            #nim-list::-webkit-scrollbar { width: 4px; }
+            #nim-list::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+            #nim-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         }
 
         .nim-card { transition: border-color .2s, background-color .2s, box-shadow .2s; }
-
-        /* ---- Header logos responsive ---- */
-        .header-logos {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: nowrap;
-            overflow: hidden;
-        }
-        .header-logos img {
-            flex-shrink: 0;
-            object-fit: contain;
-        }
-        @media (max-width: 380px) {
-            .header-logos img:first-child { height: 48px; }
-            .header-logos img:last-child  { height: 40px; }
-        }
-        @media (min-width: 381px) and (max-width: 767px) {
-            .header-logos img:first-child { height: 56px; }
-            .header-logos img:last-child  { height: 48px; }
-        }
-        @media (min-width: 768px) {
-            .header-logos img:first-child { height: 80px; }
-            .header-logos img:last-child  { height: 68px; }
-        }
     </style>
 </head>
 
 <body class="bg-gray-50 font-sans min-h-screen">
 
-    {{-- HEADER --}}
+    {{-- ======================================================
+         HEADER
+    ====================================================== --}}
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-2">
-            <div class="header-logos">
-                <img src="{{ asset('images/logo_afg.jpg') }}"  alt="AFG Bank">
-                <img src="{{ asset('images/LOGO_NIM.jpeg') }}" alt="Points NIM">
-            </div>
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+            <img src="{{ asset('images/logo_afg.jpg') }}" alt="AFG Bank" class="h-24 w-auto">
+            <img src="{{ asset('images/LOGO_NIM.jpeg') }}" alt="AFG Bank" class="h-20 w-auto">
+            <div class="h-7 w-px bg-gray-200 mx-1"></div>
+            <!-- <div>
+                <p class="text-base font-semibold text-green-700 leading-tight">Points NIM</p>
+                <p class="text-base text-gray-400 leading-tight">Nos agences à Madagascar</p>
+            </div> -->
+            <!-- <div class="h-7 w-px bg-gray-200 mx-1"></div>
+            <div>
+                <p class="text-base font-semibold text-green-700 leading-tight"> Contactez-nous: +261 32 12 032 32 </p>
+                <p class="text-base text-gray-400 leading-tight">afgmada_relationclient@afgbank.mg</p>
+            </div> -->
         </div>
     </header>
 
-    {{-- HERO --}}
-    <section class="bg-gradient-to-r from-green-800 to-green-600 text-white py-6 px-4">
+    <section class="bg-gradient-to-r from-green-800 to-green-600 text-white py-8 px-4">
         <div class="max-w-6xl mx-auto">
-            <h1 class="text-xl md:text-3xl font-bold leading-tight mb-2">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="inline-block w-1 h-5 bg-red-500 rounded-full"></span>
+                <span class="text-xs font-semibold uppercase tracking-widest text-green-200">
+                    <!-- AFG Bank – Atlantic Group -->
+                </span>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold leading-tight mb-2">
                 Trouvez votre Point NIM
             </h1>
-            <p class="text-green-100 text-sm md:text-base max-w-lg mb-2">
-                Retrouvez les différents points NIM disponibles à travers Madagascar.
-                Cliquez sur un marqueur ou une carte pour voir les détails et les horaires.
-            </p>
-            <p class="text-white text-base md:text-xl font-semibold">
-                Contactez-nous : +261 32 12 032 32 ou afgmada_relationclient@afgbank.mg
+            <p class="text-green-100 text-text-2xl md:text-base max-w-lg">
+                <!-- Retrouvez nos <strong class="text-white">{{ count($nimPoints) }} Points NIM</strong>
+                disponibles à travers Madagascar. Cliquez sur un marqueur ou une carte
+                pour voir les détails et les horaires. -->
+                Retrouvez les différents points NIM disponibles à travers Madagascar. Cliquez sur un marqueur ou une carte pour voir les détails et les horaires.<br>
+                <span class="text-2xl md:text-2xl font-bold leading-tight mb-2">Contactez-nous : +261 32 12 032 32 ou afgmada_relationclient@afgbank.mg</span>
+
             </p>
         </div>
     </section>
 
-    {{-- MAIN --}}
-    <main class="max-w-6xl mx-auto px-4 py-4 md:py-6">
+    {{-- ======================================================
+         MAIN
+    ====================================================== --}}
+    <main class="max-w-6xl mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row gap-6">
 
-        {{-- Layout : colonne sur mobile, côte-à-côte sur desktop --}}
-        <div class="flex flex-col md:flex-row gap-4 md:gap-6">
-
-            {{-- MAP (en premier sur mobile ET desktop) --}}
+            {{-- MAP --}}
             <div class="md:flex-1 min-w-0">
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden">
                     <div class="px-4 pt-3 pb-2 flex items-center gap-2 border-b border-gray-100">
@@ -181,35 +162,42 @@
                 </div>
             </div>
 
-            {{-- LISTE (sous la carte sur mobile, à droite sur desktop) --}}
+            {{-- POINTS LIST --}}
             <div class="md:w-80 shrink-0">
                 <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3 px-1">
                     Nos {{ count($nimPoints) }} Points NIM
                 </p>
-                {{-- Wrapper scrollable indépendant --}}
-                <div id="nim-list-wrapper">
-                    <div class="flex flex-col gap-3" id="nim-list"></div>
-                </div>
+                <div class="flex flex-col gap-3" id="nim-list"></div>
             </div>
 
         </div>
     </main>
 
-    {{-- FOOTER --}}
-    <footer class="mt-10 bg-white border-t border-gray-100 py-6 px-4">
-        <div class="max-w-6xl mx-auto flex flex-col items-center gap-2">
+    {{-- ======================================================
+         FOOTER
+    ====================================================== --}}
+    <footer class="mt-12 bg-white border-t border-gray-100 py-8 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col items-center gap-3">
+            <!-- <img src="{{ asset('images/logo_afg.jpg') }}" alt="AFG Bank"
+                 class="h-20 w-auto opacity-70">
+            <img src="{{ asset('images/LOGO_NIM.jpeg') }}" alt="AFG Bank"
+                 class="h-20 w-auto opacity-70"> -->
+                 
             <p class="text-xs text-gray-400 text-center">
                 © {{ date('Y') }} AFG Bank – Atlantic Group. Tous droits réservés. Madagascar.
             </p>
         </div>
     </footer>
 
-    {{-- LEAFLET JS --}}
+    {{-- ======================================================
+         LEAFLET JS
+    ====================================================== --}}
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
     <script>
     const nimPoints = {!! json_encode($nimPoints) !!};
 
+    // ---- Map init (centré sur Madagascar) ----
     const map = L.map('map').setView([-20.0, 47.0], 6);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -217,6 +205,7 @@
         maxZoom: 19,
     }).addTo(map);
 
+    // ---- Icône personnalisée ----
     function makeIcon(active) {
         const bg = active ? '#E30613' : '#00A651';
         return L.divIcon({
@@ -235,6 +224,7 @@
         });
     }
 
+    // ---- Popup ----
     function buildPopup(p) {
         const rows = p.hours.map(h => {
             const cls = h.time === 'Fermé' ? 'nim-popup-closed' : 'nim-popup-open';
@@ -255,6 +245,7 @@
         </div>`;
     }
 
+    // ---- Markers ----
     const markers = [];
     let activeIndex = null;
 
@@ -269,6 +260,7 @@
         markers.push(marker);
     });
 
+    // ---- Cartes de la liste ----
     const listEl = document.getElementById('nim-list');
 
     nimPoints.forEach((p, i) => {
@@ -294,26 +286,11 @@
             map.setView([p.lat, p.lng], 15, { animate: true });
             markers[i].openPopup();
             setActive(i);
-
-            /* Sur mobile : scroll vers la carte DANS le wrapper scrollable */
-            if (window.innerWidth < 768) {
-                /* Scroll le wrapper vers la carte cliquée */
-                const wrapper = document.getElementById('nim-list-wrapper');
-                const cardEl  = document.getElementById(`card-${i}`);
-                if (wrapper && cardEl) {
-                    const cardTop    = cardEl.offsetTop;
-                    const wrapperTop = wrapper.offsetTop;
-                    wrapper.scrollTo({ top: cardTop - wrapperTop, behavior: 'smooth' });
-                }
-                /* Scroll la page vers la carte si nécessaire */
-                setTimeout(() => {
-                    document.getElementById('nim-list-wrapper')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 300);
-            }
         });
         listEl.appendChild(card);
     });
 
+    // ---- État actif ----
     function setActive(i) {
         if (activeIndex !== null) {
             markers[activeIndex].setIcon(makeIcon(false));
@@ -321,18 +298,14 @@
         }
         activeIndex = i;
         markers[i].setIcon(makeIcon(true));
-        const cardEl = document.getElementById(`card-${i}`);
-        cardEl?.classList.add('card-active');
+        document.getElementById(`card-${i}`)?.classList.add('card-active');
 
-        /* Desktop : scroll dans le wrapper */
-        if (window.innerWidth >= 768) {
-            const wrapper = document.getElementById('nim-list-wrapper');
-            if (wrapper && cardEl) {
-                wrapper.scrollTo({ top: cardEl.offsetTop - wrapper.offsetTop - 8, behavior: 'smooth' });
-            }
+        if (window.innerWidth < 768) {
+            document.getElementById(`card-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }
 
+    // ---- Premier point actif par défaut ----
     setActive(0);
     markers[0].openPopup();
 
