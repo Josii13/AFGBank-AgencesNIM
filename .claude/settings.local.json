@@ -3,7 +3,8 @@
     "allow": [
       "Bash(mkdir -p \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/public/images\" && cp \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/logo_afg.jpg\" \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/public/images/logo_afg.jpg\" && echo \"OK\")",
       "Bash(cd \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE\" && php artisan view:clear && php artisan route:clear)",
-      "Bash(cd \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE\" && php artisan config:clear && php artisan migrate --force 2>&1)"
+      "Bash(cd \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE\" && php artisan config:clear && php artisan migrate --force 2>&1)",
+      "WebFetch(domain:afgbank-agencesnim.ywcdigital.com)"
     ]
   }
 }

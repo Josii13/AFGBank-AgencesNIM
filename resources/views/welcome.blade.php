@@ -103,33 +103,37 @@
     ====================================================== --}}
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
-            <img src="{{ asset('images/logo_afg.jpg') }}" alt="AFG Bank" class="h-20 w-auto">
+            <img src="{{ asset('images/logo_afg.jpg') }}" alt="AFG Bank" class="h-24 w-auto">
+            <img src="{{ asset('images/LOGO_NIM.jpeg') }}" alt="AFG Bank" class="h-20 w-auto">
             <div class="h-7 w-px bg-gray-200 mx-1"></div>
             <div>
-                <p class="text-xs font-semibold text-green-700 leading-tight">Points NIM</p>
-                <p class="text-xs text-gray-400 leading-tight">Nos agences à Madagascar</p>
+                <p class="text-base font-semibold text-green-700 leading-tight">Points NIM</p>
+                <p class="text-base text-gray-400 leading-tight">Nos agences à Madagascar</p>
+            </div>
+            <div class="h-7 w-px bg-gray-200 mx-1"></div>
+            <div>
+                <p class="text-base font-semibold text-green-700 leading-tight"> Contactez-nous: +261 32 12 032 32 </p>
+                <p class="text-base text-gray-400 leading-tight">afgmada_relationclient@afgbank.mg</p>
             </div>
         </div>
     </header>
 
-    {{-- ======================================================
-         HERO
-    ====================================================== --}}
     <section class="bg-gradient-to-r from-green-800 to-green-600 text-white py-8 px-4">
         <div class="max-w-6xl mx-auto">
             <div class="flex items-center gap-2 mb-3">
                 <span class="inline-block w-1 h-5 bg-red-500 rounded-full"></span>
                 <span class="text-xs font-semibold uppercase tracking-widest text-green-200">
-                    AFG Bank – Atlantic Group
+                    <!-- AFG Bank – Atlantic Group -->
                 </span>
             </div>
             <h1 class="text-2xl md:text-3xl font-bold leading-tight mb-2">
                 Trouvez votre Point NIM
             </h1>
             <p class="text-green-100 text-sm md:text-base max-w-lg">
-                Retrouvez nos <strong class="text-white">{{ count($nimPoints) }} Points NIM</strong>
+                <!-- Retrouvez nos <strong class="text-white">{{ count($nimPoints) }} Points NIM</strong>
                 disponibles à travers Madagascar. Cliquez sur un marqueur ou une carte
-                pour voir les détails et les horaires.
+                pour voir les détails et les horaires. -->
+                Retrouvez les différents points NIM disponibles à travers Madagascar. Cliquez sur un marqueur ou une carte pour voir les détails et les horaires.
             </p>
         </div>
     </section>
@@ -172,8 +176,11 @@
     ====================================================== --}}
     <footer class="mt-12 bg-white border-t border-gray-100 py-8 px-4">
         <div class="max-w-6xl mx-auto flex flex-col items-center gap-3">
-            <img src="{{ asset('images/logo_afg.jpg') }}" alt="AFG Bank"
+            <!-- <img src="{{ asset('images/logo_afg.jpg') }}" alt="AFG Bank"
                  class="h-20 w-auto opacity-70">
+            <img src="{{ asset('images/LOGO_NIM.jpeg') }}" alt="AFG Bank"
+                 class="h-20 w-auto opacity-70"> -->
+                 
             <p class="text-xs text-gray-400 text-center">
                 © {{ date('Y') }} AFG Bank – Atlantic Group. Tous droits réservés. Madagascar.
             </p>
