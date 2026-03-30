@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs_20"]
+nixPkgs = ["nodejs_20", "php82", "php82Packages.composer2"]
 
 [phases.build]
 cmds = [
@@ -12,5 +12,8 @@ cmds = [
     "php artisan event:cache"
 ]
 
+[phases.deploy]
+cmds = ["php artisan migrate --force"]
+
 [start]
-cmd = "php artisan migrate --force && PHP_CLI_SERVER_WORKERS=4 php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
+cmd = "PHP_CLI_SERVER_WORKERS=4 php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
