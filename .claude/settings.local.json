@@ -4,7 +4,14 @@
       "Bash(mkdir -p \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/public/images\" && cp \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/logo_afg.jpg\" \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/public/images/logo_afg.jpg\" && echo \"OK\")",
       "Bash(cd \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE\" && php artisan view:clear && php artisan route:clear)",
       "Bash(cd \"C:/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE\" && php artisan config:clear && php artisan migrate --force 2>&1)",
-      "WebFetch(domain:afgbank-agencesnim.ywcdigital.com)"
+      "WebFetch(domain:afgbank-agencesnim.ywcdigital.com)",
+      "Bash(find /c/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE -maxdepth 1 -type f -name .*)",
+      "Bash(find /c/wamp64/www/YESWECANGE/AFG-BANK-LANDING-PAGE/database -type f -name *.php)",
+      "Bash(head:*)",
+      "Bash(php artisan:*)",
+      "Bash(npm run:*)",
+      "Bash(./node_modules/.bin/vite build:*)",
+      "Bash(npm install:*)"
     ]
   }
 }
