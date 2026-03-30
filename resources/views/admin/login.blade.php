@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin – AFG Bank</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @php
+        $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFile = $manifest['resources/css/app.css']['file'] ?? null;
+    @endphp
+    @if($cssFile)
+        <link rel="stylesheet" href="{{ secure_asset('build/' . $cssFile) }}">
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+    @endif
 </head>
 <body class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
     <div class="w-full max-w-sm">

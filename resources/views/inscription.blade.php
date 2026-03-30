@@ -8,7 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    @php
+        $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFile = $manifest['resources/css/app.css']['file'] ?? null;
+    @endphp
+    @if($cssFile)
+        <link rel="stylesheet" href="{{ secure_asset('build/' . $cssFile) }}">
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+    @endif
     <style>
         body { font-family: 'Instrument Sans', sans-serif; }
         .afg-green { color: #00A651; }
