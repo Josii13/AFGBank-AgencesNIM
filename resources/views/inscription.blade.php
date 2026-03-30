@@ -17,6 +17,7 @@
     @else
         <script src="https://cdn.tailwindcss.com"></script>
     @endif
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body { font-family: 'Instrument Sans', sans-serif; }
         .afg-green { color: #00A651; }
@@ -189,6 +190,12 @@
                     <p class="field-error-contact hidden text-red-500 text-xs mt-1"></p>
                 </div>
 
+                {{-- reCAPTCHA --}}
+                <div class="mb-5">
+                    <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                    <p id="recaptcha-error" class="hidden text-red-500 text-xs mt-1">Veuillez valider le reCAPTCHA.</p>
+                </div>
+
                 {{-- Submit --}}
                 <button
                     type="submit"
@@ -244,6 +251,14 @@
 
             if (!validateForm()) return;
 
+            // Vérification reCAPTCHA côté client
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                document.getElementById('recaptcha-error').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('recaptcha-error').classList.add('hidden');
+
             const btn     = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             const spinner = document.getElementById('btnSpinner');
@@ -267,6 +282,7 @@
                 if (res.ok) {
                     showModal();
                     this.reset();
+                    grecaptcha.reset();
                     document.getElementById('compte-field').classList.add('hidden');
                     // Reset radio card styles
                     document.querySelectorAll('.radio-card label').forEach(l => {
