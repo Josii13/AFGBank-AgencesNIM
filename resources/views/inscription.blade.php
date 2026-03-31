@@ -223,14 +223,17 @@
                 </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Demande envoyée !</h3>
-            <p class="text-gray-500 text-sm mb-6">
+            <p class="text-gray-500 text-sm mb-4">
                 Merci pour votre intérêt. Notre équipe prendra contact avec vous dans les plus brefs délais.
+            </p>
+            <p class="text-sm text-gray-400 mb-6">
+                Vous serez redirigé automatiquement dans <span id="countdown" class="font-semibold text-[#00A651]">4</span> seconde<span id="plural">s</span>…
             </p>
             <button
                 onclick="closeModal()"
                 class="w-full bg-afg-green hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition-colors"
             >
-                Fermer
+                Continuer maintenant
             </button>
         </div>
     </div>
@@ -379,13 +382,39 @@
             });
         }
 
+        let countdownTimer = null;
+
         function showModal() {
             document.getElementById('modal').classList.add('show');
+            startCountdown();
+        }
+
+        function startCountdown() {
+            let seconds = 4;
+            const countdownEl = document.getElementById('countdown');
+            const pluralEl    = document.getElementById('plural');
+
+            countdownEl.textContent = seconds;
+
+            countdownTimer = setInterval(() => {
+                seconds--;
+                countdownEl.textContent = seconds;
+                pluralEl.textContent = seconds > 1 ? 's' : '';
+                if (seconds <= 0) {
+                    clearInterval(countdownTimer);
+                    redirect();
+                }
+            }, 1000);
         }
 
         function closeModal() {
+            clearInterval(countdownTimer);
             document.getElementById('modal').classList.remove('show');
-            window.location.href = 'https://www.orange.ci/fr/can/maroc-2025/accueil.html';
+            redirect();
+        }
+
+        function redirect() {
+            window.location.href = 'https://afgbank.cm/produits-services/';
         }
 
         // Fermer modal en cliquant dehors
