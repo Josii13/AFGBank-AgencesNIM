@@ -385,6 +385,7 @@
 
         function closeModal() {
             document.getElementById('modal').classList.remove('show');
+            window.location.href = 'https://www.orange.ci/fr/can/maroc-2025/accueil.html';
         }
 
         // Fermer modal en cliquant dehors
